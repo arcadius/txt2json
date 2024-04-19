@@ -19,7 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 @ExtendWith(MockitoExtension.class)
-class Txt2JsonApUTest {
+class Txt2JsonApiUTest {
 
     @Mock
     private FileProcessorService fileProcessorService;

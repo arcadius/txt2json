@@ -49,13 +49,13 @@ public class GeoIpFilter extends OncePerRequestFilter {
         final String geoIpIsp = geoIp.getIsp().toUpperCase();
 
         if (blockedCountries.contains(geoIpCountry)) {
-            response.sendError(HttpStatus.FORBIDDEN.value(), "Country " + geoIpCountry + " is not allowed to access this service");
+            response.sendError(HttpStatus.FORBIDDEN.value(), "Country %s is not allowed to access this service".formatted(geoIpCountry));
             return true;
         }
 
         for (String blockedIsp : blockedIsps) {
             if (geoIpIsp.contains(blockedIsp)) {
-                response.sendError(HttpStatus.FORBIDDEN.value(), "Organisation " + geoIpIsp + " is not allowed to access this service");
+                response.sendError(HttpStatus.FORBIDDEN.value(), "Organisation %s is not allowed to access this service".formatted(geoIpIsp));
                 return true;
             }
         }

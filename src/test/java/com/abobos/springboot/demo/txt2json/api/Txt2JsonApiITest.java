@@ -3,6 +3,7 @@ package com.abobos.springboot.demo.txt2json.api;
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlPathMatching;
+import static java.lang.String.format;
 import static java.lang.String.valueOf;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
@@ -276,7 +277,7 @@ class Txt2JsonApiITest {
     private static ResponseDefinitionBuilder geoIpResponseBuilder(final String countryCode, final String isp) {
         return aResponse()
                 .withHeader("Content-Type", "application/json")
-                .withBody(String.format("""
+                .withBody(format("""
                         {"query":"127.0.0.1","countryCode": "%s","isp": "%s"}""", countryCode, isp));
     }
 
@@ -303,7 +304,7 @@ class Txt2JsonApiITest {
 
 
         HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(body, headers);
-        final String url = "http://localhost:" + port + "/api/txt2json";
+        final String url = "http://localhost:%d/api/txt2json".formatted(port);
         return restTemplate.postForEntity(url, entity, String.class);
 
     }

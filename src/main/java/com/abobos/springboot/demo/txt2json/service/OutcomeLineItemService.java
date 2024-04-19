@@ -1,5 +1,7 @@
 package com.abobos.springboot.demo.txt2json.service;
 
+import static java.lang.String.format;
+
 import com.abobos.springboot.demo.txt2json.model.OutcomeLineItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +37,7 @@ public class OutcomeLineItemService {
         final String[] cells = fileLine.trim().split("\\|");
         if (cells.length != LINE_FIELD_COUNT && enableFileValidation) {
             // bad line
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Error at line # %s '%s': Expecting 7 fields but got %s", lineNumber, fileLine, cells.length));
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, format("Error at line # %s '%s': Expecting 7 fields but got %s", lineNumber, fileLine, cells.length));
         }
 
         final OutcomeLineItem outcomeLineItem = new OutcomeLineItem();
